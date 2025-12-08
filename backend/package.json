@@ -6,8 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
-    "view-messages": "node view-messages.js",
-    "add-test-messages": "node add-test-messages.js"
+    "view-messages": "node view-messages.js"
   },
     "keywords": ["ai", "chat", "express"],
     "author": "",
