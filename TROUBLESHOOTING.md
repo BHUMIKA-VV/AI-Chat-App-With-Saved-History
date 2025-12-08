@@ -2,6 +2,29 @@
 
 ## 🔴 Error: "Failed to send message. Please try again."
 
+### **For Deployed Apps (Vercel + Render):**
+
+If you're getting 404 errors on Vercel:
+
+1. **Make sure backend is deployed on Render**
+2. **Set environment variable in Vercel:**
+   - Go to: Vercel Dashboard → Settings → Environment Variables
+   - Add: `REACT_APP_API_URL` = `https://your-backend.onrender.com/api`
+   - Must end with `/api`
+   - Select all environments (Production, Preview, Development)
+   - Save and **Redeploy** (uncheck "Use existing Build Cache")
+
+### **Vercel 404 Error (App not loading):**
+
+1. **Check Root Directory in Vercel Settings:**
+   - Should be set to: `frontend`
+   - Not `/` or empty
+2. **Redeploy** after changing settings
+
+---
+
+## 🔴 Error: "Failed to send message. Please try again."
+
 This error means the frontend cannot connect to the backend. Here's how to fix it:
 
 ### **If Running Locally:**
