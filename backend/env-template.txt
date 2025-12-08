@@ -1,0 +1,5 @@
+PORT=5000
+OPENAI_API_KEY=your_openai_api_key_here
+# OR use Hugging Face as alternative:
+# HUGGING_FACE_API_KEY=your_huggingface_api_key_here
+
