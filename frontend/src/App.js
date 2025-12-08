@@ -32,7 +32,11 @@ function App() {
       setMessages(response.data);
     } catch (err) {
       console.error('Error fetching chat history:', err);
-      setError('Failed to load chat history. Please refresh the page.');
+      // Don't show error on initial load if backend isn't ready yet
+      // Only show if it's an actual error response (not network)
+      if (err.response && err.response.status !== 200) {
+        setError('Failed to load chat history. Please refresh the page.');
+      }
     }
   };
 
@@ -55,9 +59,20 @@ function App() {
       
       // Add new messages to the state
       setMessages(prev => [...prev, ...response.data]);
+      setError(null); // Clear any previous errors
     } catch (err) {
       console.error('Error sending message:', err);
-      setError('Failed to send message. Please try again.');
+      let errorMsg = 'Failed to send message. ';
+      
+      if (err.code === 'ERR_NETWORK' || err.message.includes('Network Error')) {
+        errorMsg += 'Cannot connect to backend. Make sure the backend server is running at ' + API_BASE_URL;
+      } else if (err.response) {
+        errorMsg += `Error: ${err.response.status} - ${err.response.data?.error || err.response.statusText}`;
+      } else {
+        errorMsg += 'Please try again or check your connection.';
+      }
+      
+      setError(errorMsg);
       // Restore input message on error
       setInputMessage(userMessage);
     } finally {
